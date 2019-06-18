@@ -1,6 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import './App.css';
+
+//implement store
+import { Provider } from 'react-redux'
+import store from './store'
+
+
+
 import Navbar from './components/layout/Navbar';
 import Dashboard from './components/layout/Dashboard';
 import Register from './components/auth/Register';
@@ -8,8 +14,11 @@ import Login from './components/auth/Login';
 import AddClient from './components/clients/AddClient'
 import NotFound from './components/layout/NotFound'
 
+import './App.css';
+
 function App() {
   return (
+    <Provider store={store}>
     <Router>
       <div className="App">
         <Navbar />
@@ -24,6 +33,7 @@ function App() {
         </div>
       </div>
     </Router>
+    </Provider>
   );
 }
 
