@@ -1,26 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
+import Navbar from './components/layout/Navbar';
+import Dashboard from './components/layout/Dashboard';
+import Register from './components/auth/Register';
+import Login from './components/auth/Login';
+import AddClient from './components/clients/AddClient'
+import NotFound from './components/layout/NotFound'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar />
+        <div className="container">
+          <Switch>
+            <Route exact path="/" component={Dashboard} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/client/add" component={AddClient}/>
+            <Route component={NotFound}/>
+          </Switch>
+        </div>
+      </div>
+    </Router>
   );
 }
 
 export default App;
+// The exact param disables the partial matching for a route and makes 
+//sure that it only returns the route if the path is an EXACT match to the current url.
