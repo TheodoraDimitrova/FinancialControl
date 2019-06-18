@@ -1,31 +1,31 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { firestoreConnect, firebase } from 'react-redux-firebase';
+import Loader from '../layout/Loader';
 
 class Clients extends Component {
+  state = {
+    totalOwed: null
+  };
+  static getDerivedStateFromProps(props, state) {
+    //componentWillReceiveProps() is a static method which is invoked after a component is instantiated as well as when it receives new props
+    const { clients } = props;
+
+    if (clients) {
+      const total = clients.reduce((total, client) => {
+        return total + parseFloat(client.balance.toString());
+      }, 0);
+      return { totalOwed: total };
+    } else {
+      return null;
+    }
+  }
   render() {
-    const clients = [
-      {
-        id: 1,
-        name: 'Leanne Graham',
-        username: 'Bret',
-        email: 'Sincere@april.biz',
-        balance: 30
-      },
-      {
-        id: 2,
-        name: 'Ervin Howell',
-        username: 'Antonette',
-        email: 'Shanna@melissa.tv',
-        balance: 300
-      },
-      {
-        id: 3,
-        name: 'Clementine Bauch',
-        username: 'Samantha',
-        email: 'Nathan@yesenia.net',
-        balance: 345
-      }
-    ];
+    const { clients } = this.props;
+    const { totalOwed } = this.state;
 
     if (clients) {
       return (
@@ -38,26 +38,28 @@ class Clients extends Component {
               </h2>
             </div>
             <div className="col-md-6">
-              <h2>Total: 345</h2>
+              <h2 className="text-warning">
+                Total: {parseFloat(totalOwed).toFixed(2)} лева{' '}
+              </h2>
             </div>
           </div>
           <table className="table table-striped">
             <thead className="thead-inverse">
               <tr>
                 <th>Name</th>
-                <th>Username</th>
+                <th>Last Name</th>
                 <th>Email</th>
                 <th>Balance</th>
-                <th></th>
+                <th />
               </tr>
             </thead>
             <tbody>
               {clients.map(client => (
                 <tr key={client.id}>
-                  <td>{client.name}</td>
-                  <td>{client.username}</td>
+                  <td>{client.firstName}</td>
+                  <td>{client.lastName}</td>
                   <td>{client.email}</td>
-                  <td>{ parseFloat(client.balance).toFixed(2)} лева</td>
+                  <td>{parseFloat(client.balance).toFixed(2)} лева</td>
                   <td>
                     <Link
                       to={`/client/${client.id}`}
@@ -73,9 +75,18 @@ class Clients extends Component {
         </div>
       );
     } else {
-      return <h1>Loading...</h1>;
+      return <Loader />;
     }
   }
 }
-export default Clients;
+Clients.propTypes = {
+  firestore: PropTypes.object.isRequired,
+  clients: PropTypes.array
+};
+export default compose(
+  firestoreConnect([{ collection: 'clients' }]),
+  connect((state, props) => ({
+    clients: state.firestore.ordered.clients //mapStateToProps
+  }))
+)(Clients);
 //.table-striped to add zebra-striping
