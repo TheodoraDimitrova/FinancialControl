@@ -13,8 +13,10 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import AddClient from './components/clients/AddClient'
 import NotFound from './components/layout/NotFound'
+import Details from './components/clients/Details';
 
 import './App.css';
+
 
 function App() {
   return (
@@ -28,6 +30,7 @@ function App() {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/client/add" component={AddClient}/>
+            <Route exact path="/client/:id" component={Details}/>
             <Route component={NotFound}/>
           </Switch>
         </div>
