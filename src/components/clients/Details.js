@@ -8,8 +8,63 @@ import Loader from '../layout/Loader';
 import classnames from 'classnames';
 
 class Details extends Component {
+  state = { showBalanceUpdate: false, balanceUpdateAmount: '' };
+  balanceSubmit = e => {
+    e.preventDefault();
+
+    const { client, firestore } = this.props;
+    const { balanceUpdateAmount } = this.state;
+    const clientUpdate = {
+      //just set the balance
+      balance: parseFloat(balanceUpdateAmount)
+    };
+    //update in firestore
+    firestore.update({ collection: 'clients', doc: client.id }, clientUpdate);
+  };
+
+  onChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  deleteClient = e => {
+    e.preventDefault();
+    const { client, firestore } = this.props;
+    firestore
+      .delete({ collection: 'clients', doc: client.id })
+      .then(() => this.props.history.push('/'));
+  };
+
   render() {
     const { client } = this.props;
+    const { showBalanceUpdate, balanceUpdateAmount } = this.state;
+    let balanceForm = '';
+    if (showBalanceUpdate) {
+      balanceForm = (
+        <form onSubmit={this.balanceSubmit}>
+          <div className="input-group">
+            <input
+              className="form-control"
+              type="text"
+              name="balanceUpdateAmount"
+              placeholder="Add balance"
+              value={balanceUpdateAmount}
+              onChange={this.onChange}
+            />
+            <div className="input-group-append">
+              <input
+                type="submit"
+                value="Update"
+                className="btn btn-outline-dark"
+              />
+            </div>
+          </div>
+        </form>
+      );
+    } else {
+      balanceForm = null;
+    }
 
     if (client) {
       return (
@@ -26,7 +81,9 @@ class Details extends Component {
                 <Link to={`/client/edit/${client.id}`} className="btn btn-dark">
                   Edit
                 </Link>
-                <button className="btn btn-danger">Delete</button>
+                <button className="btn btn-danger" onClick={this.deleteClient}>
+                  Delete
+                </button>
               </div>
             </div>
           </div>
@@ -55,8 +112,22 @@ class Details extends Component {
                       })}
                     >
                       Balance: {parseFloat(client.balance).toFixed(2)}
-                    </span>
+                    </span>{' '}
+                    <small>
+                      {' '}
+                      <a
+                        href="#!"
+                        onClick={() =>
+                          this.setState({
+                            showBalanceUpdate: !this.state.showBalanceUpdate
+                          })
+                        }
+                      >
+                        <i className="fas fa-pencil-alt" />
+                      </a>{' '}
+                    </small>
                   </h3>
+                  {balanceForm}
                 </div>
               </div>
 
