@@ -14,6 +14,7 @@ import Login from './components/auth/Login';
 import AddClient from './components/clients/AddClient'
 import NotFound from './components/layout/NotFound'
 import Details from './components/clients/Details';
+import EditClient from './components/clients/EditClient';
 
 import './App.css';
 
@@ -31,6 +32,7 @@ function App() {
             <Route exact path="/login" component={Login} />
             <Route exact path="/client/add" component={AddClient}/>
             <Route exact path="/client/:id" component={Details}/>
+            <Route exact path="/client/edit/:id" component={EditClient}/>
             <Route component={NotFound}/>
           </Switch>
         </div>
