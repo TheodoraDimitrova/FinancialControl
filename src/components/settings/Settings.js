@@ -10,16 +10,16 @@ import {
 
 class Settings extends Component {
   allowRegistration = () => {
-      const {setAllowRegistration}=this.props
-      setAllowRegistration()
+    const { setAllowRegistration } = this.props;
+    setAllowRegistration();
   };
   disableBalanceOnAddChange = () => {
-    const {setDisableBalanceOnAdd}=this.props
-    setDisableBalanceOnAdd()
+    const { setDisableBalanceOnAdd } = this.props;
+    setDisableBalanceOnAdd();
   };
   disableBalanceOnEditChange = () => {
-    const {setDisableBalanceOnEdit}=this.props
-    setDisableBalanceOnEdit()
+    const { setDisableBalanceOnEdit } = this.props;
+    setDisableBalanceOnEdit();
   };
 
   render() {
