@@ -26,7 +26,7 @@ function App() {
           <Navbar />
           <div className="container">
             <Switch>
-              <Route exact path="/" component={ UserIsAuthenticated(Dashboard)} />//user has to be authenticated
+              <Route exact path="/" component={ UserIsAuthenticated(Dashboard)} />
               <Route exact path="/settings" component={ UserIsAuthenticated(Settings)} />
               <Route exact path="/register" component={ UserIsNotAuthenticated( Register)} />
               <Route exact path="/login" component={UserIsNotAuthenticated(Login) } />

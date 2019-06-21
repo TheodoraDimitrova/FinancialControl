@@ -44,21 +44,23 @@ if (localStorage.getItem('settings') === null) {
   const defaultSettings = {
     disableBalanceOnAdd: true,
     disableBalanceOnEdit: false,
-    allowRegistration: false
+    allowRegistration: true
   };
   //set to localStorage
-  localStorage.setItem('settings',JSON.stringify(defaultSettings))// must set like strings in local storage
+  localStorage.setItem('settings', JSON.stringify(defaultSettings)); // must set like strings in local storage
 }
 
-
 // Create store with reducers and initial state
-const initialState = {settings:JSON.parse(localStorage.getItem("settings"))}; //add settings
+const initialState = { settings: JSON.parse(localStorage.getItem('settings')) }; //add settings
 const store = createStoreWithFirebase(
   rootReducer,
   initialState,
   compose(
     reactReduxFirebase(firebase),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    process.env.NODE_ENV === 'production'
+      ? x => x
+      : window.__REDUX_DEVTOOLS_EXTENSION__ &&
+          window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 

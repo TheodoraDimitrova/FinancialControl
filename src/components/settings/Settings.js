@@ -28,7 +28,7 @@ class Settings extends Component {
       disableBalanceOnAdd,
       disableBalanceOnEdit
     } = this.props.settings;
-    const { auth } = this.props;
+   
 
     return (
       <div>
@@ -84,13 +84,11 @@ Settings.propTypes = {
   setAllowRegistration: PropTypes.func.isRequired,
   setDisableBalanceOnAdd: PropTypes.func.isRequired,
   setDisableBalanceOnEdit: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
   settings: PropTypes.object.isRequired
 };
 
 export default connect(
   (state, props) => ({
-    auth: state.firebase.auth,
     settings: state.settings
   }),
   { setAllowRegistration, setDisableBalanceOnAdd, setDisableBalanceOnEdit }
