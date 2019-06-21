@@ -21,7 +21,7 @@ class Navbar extends Component {
 
   onLogoutClick = e => {
     e.preventDefault();
-    console.log(this.props)
+    console.log(this.props);
     const { firebase } = this.props;
     firebase.logout();
   };
@@ -46,30 +46,31 @@ class Navbar extends Component {
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarMain">
-          <ul className="navbar-nav mr-auto">
-            {isAuthenticated ? (
+          {isAuthenticated ? (
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item active">
+                <a href="#!" className="nav-link">
+                  {auth.email}
+                </a>
+              </li>
               <li className="nav-item active">
                 <Link to="/" className="nav-link">
                   Dashboard
                 </Link>
               </li>
-            ) : null}
-            {isAuthenticated ? (
-              <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <a href="#!" className="nav-link">
-                    {auth.email}
-                  </a>
-                </li>
-              </ul>
-            ) : null}
-            {isAuthenticated ? (
-              <li className="nav-item">
+              <li className="nav-item active">
+                <Link to="/settings" className="nav-link">
+                  Settings
+                </Link>
+              </li>
+              <li className="nav-item active">
                 <a href="#!" className="nav-link" onClick={this.onLogoutClick}>
                   Logout{' '}
                 </a>
               </li>
-            ) : null}
+            </ul>
+          ) : null}
+         
             {/* <li className="nav-item active">
               <Link to="/register" className="nav-link">
                 Register
@@ -80,7 +81,7 @@ class Navbar extends Component {
                 Login
               </Link>
             </li> */}
-          </ul>
+         
         </div>
       </nav>
     );
@@ -88,11 +89,13 @@ class Navbar extends Component {
 }
 Navbar.propTypes = {
   firebase: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired
 };
 export default compose(
   firebaseConnect(),
   connect((state, props) => ({
-    auth: state.firebase.auth //come from redux state
+    auth: state.firebase.auth, //come from redux state
+    settings: state.settings
   }))
 )(Navbar);
