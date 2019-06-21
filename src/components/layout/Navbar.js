@@ -30,6 +30,7 @@ class Navbar extends Component {
     //navbar-expand-lg never collapse
     const { isAuthenticated } = this.state;
     const { auth } = this.props;
+    const {allowRegistration}=this.props.settings
     return (
       <nav className="navbar  navbar-expand-lg navbar-light bg-primary mb-4">
         <div className="container">
@@ -70,8 +71,9 @@ class Navbar extends Component {
               </li>
             </ul>
           ) : null}
-         
-            {/* <li className="nav-item active">
+         {allowRegistration && !isAuthenticated ? (
+           <ul className="navbar-nav ml-auto">
+             <li className="nav-item active">
               <Link to="/register" className="nav-link">
                 Register
               </Link>
@@ -80,7 +82,11 @@ class Navbar extends Component {
               <Link to="/login" className="nav-link">
                 Login
               </Link>
-            </li> */}
+            </li> 
+           </ul>
+
+         ) : null}
+      
          
         </div>
       </nav>
