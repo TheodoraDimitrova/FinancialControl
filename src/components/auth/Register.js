@@ -57,6 +57,7 @@ class Register extends Component {
                     name="email"
                     value={this.state.email}
                     onChange={this.onChange}
+                    required
                   />
                 </div>
                 <div className="form-group">
@@ -68,6 +69,7 @@ class Register extends Component {
                     minLength="6"
                     value={this.state.password}
                     onChange={this.onChange}
+                    required
                   />
                 </div>
                 <input

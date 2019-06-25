@@ -57,6 +57,8 @@ class AddClient extends Component {
                       name="firstName"
                       onChange={this.onChange}
                       value={this.state.firstName}
+                      minLength="3"
+                      maxLength="20"
                       required
                     />
                   </div>
@@ -68,6 +70,8 @@ class AddClient extends Component {
                       name="lastName"
                       onChange={this.onChange}
                       value={this.state.lastName}
+                      minLength="5"
+                      maxLength="10"
                       required
                     />
                   </div>
