@@ -111,6 +111,7 @@ class EditClient extends Component {
                           defaultValue={client.balance}
                           disabled={disableBalanceOnEdit}
                           min='0'
+                          pattern="^[0-9]"
                         />
                       </div>
 

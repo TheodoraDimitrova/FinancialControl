@@ -52,6 +52,7 @@ class Details extends Component {
               value={balanceUpdateAmount}
               onChange={this.onChange}
               min="0"
+              pattern="^[0-9]"
             />
             <div className="input-group-append">
               <input

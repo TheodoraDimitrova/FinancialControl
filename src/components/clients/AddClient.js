@@ -108,6 +108,7 @@ class AddClient extends Component {
                       value={this.state.balance}
                       disabled={disableBalanceOnAdd}
                       min="0"
+                      pattern="^[0-9]"
                     />
                   </div>
 
