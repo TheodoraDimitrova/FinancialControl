@@ -107,6 +107,7 @@ class AddClient extends Component {
                       onChange={this.onChange}
                       value={this.state.balance}
                       disabled={disableBalanceOnAdd}
+                      min="0"
                     />
                   </div>
 

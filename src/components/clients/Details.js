@@ -51,6 +51,7 @@ class Details extends Component {
               placeholder="Add balance"
               value={balanceUpdateAmount}
               onChange={this.onChange}
+              min="0"
             />
             <div className="input-group-append">
               <input

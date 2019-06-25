@@ -110,6 +110,7 @@ class EditClient extends Component {
                           ref={this.balanceInput}
                           defaultValue={client.balance}
                           disabled={disableBalanceOnEdit}
+                          min='0'
                         />
                       </div>
 
