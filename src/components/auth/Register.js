@@ -64,6 +64,7 @@ class Register extends Component {
                     type="password"
                     className="form-control"
                     name="password"
+                    minLength="6"
                     value={this.state.password}
                     onChange={this.onChange}
                   />
@@ -71,7 +72,7 @@ class Register extends Component {
                 <input
                   type="submit"
                   className="btn btn-primary btn-block"
-                  value="SingUp"
+                  value="Register"
                 />
               </form>
             </div>
