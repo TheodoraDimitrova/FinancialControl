@@ -46,7 +46,7 @@ class Details extends Component {
           <div className="input-group">
             <input
               className="form-control"
-              type="text"
+              type="number"
               name="balanceUpdateAmount"
               placeholder="Add balance"
               value={balanceUpdateAmount}
