@@ -72,9 +72,10 @@ class AddClient extends Component {
                     />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="phone">Phone</label>
+                    <label htmlFor="phone">Phone Format :+359 (XXX) XX-XX-XX</label>
                     <input
-                      type="text"
+                      type="tel"
+                      pattern="[\+]\d{3}\s[\(]\d{3}[\)]\s\d{2}[\-]\d{2}[\-]\d{2}"
                       className="form-control"
                       name="phone"
                       onChange={this.onChange}

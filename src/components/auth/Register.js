@@ -16,6 +16,7 @@ class Register extends Component {
     e.preventDefault();
     const { firebase, notifyUser } = this.props;
     const { email, password } = this.state;
+    
     firebase
       .createUser({
         email,
